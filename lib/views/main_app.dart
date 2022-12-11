@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_top_bar.dart';
 import '../widgets/food_categories_list.dart';
 import '../widgets/food_list.dart';
-import '../widgets/menu_list.dart';
+import '../widgets/meal_list.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
                   ),
                   FoodList(),
                   FoodCategoriesList(),
-                  MenuList(),
+                  MealList(),
                 ],
               ),
             )

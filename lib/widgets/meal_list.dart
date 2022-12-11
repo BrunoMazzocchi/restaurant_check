@@ -1,9 +1,10 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_check/widgets/meal_image.dart';
 
-class MenuList extends StatelessWidget {
-  const MenuList({Key? key}) : super(key: key);
+class MealList extends StatelessWidget {
+  const MealList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class MenuList extends StatelessWidget {
                     'Life is better with a good dessert.'),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
