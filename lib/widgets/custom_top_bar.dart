@@ -2,13 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomTopBar extends StatelessWidget {
-  const CustomTopBar({Key? key}) : super(key: key);
+  final String phrase;
+  final String question;
+
+  const CustomTopBar({
+    Key? key,
+    required this.phrase,
+    required this.question,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String name = 'User';
     return Container(
-
       margin: const EdgeInsets.only(
         top: 40,
         left: 10,
@@ -42,7 +48,7 @@ class CustomTopBar extends StatelessWidget {
             ],
           ),
           Container(
-            // TODO: Check the screen width with variables
+              // TODO: Check the screen width with variables
               width: 600,
               margin: const EdgeInsets.only(
                 top: 20,
@@ -51,19 +57,21 @@ class CustomTopBar extends StatelessWidget {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:  [
-                  Text('Hello there $name, ',
+                children: [
+                  Text(
+                    '$phrase $name, ',
                     style: const TextStyle(
                         fontFamily: 'SF Pro',
                         fontWeight: FontWeight.normal,
-                        fontSize: 20
-                    ),),
-                  const Text('Would you like to order now?',
-                    style: TextStyle(
+                        fontSize: 20),
+                  ),
+                  Text(
+                    question,
+                    style: const TextStyle(
                         fontFamily: 'SF Pro',
                         fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    ),),
+                        fontSize: 20),
+                  ),
                 ],
               ))
         ],

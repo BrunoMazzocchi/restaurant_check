@@ -22,7 +22,7 @@ class MealList extends StatelessWidget {
                 fontSize: 20,
               )),
           Container(
-            height: 245,
+            height: 320,
             margin: const EdgeInsets.only(top: 20),
             child: ListView(
               scrollDirection: Axis.vertical,

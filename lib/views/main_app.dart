@@ -13,23 +13,32 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Column(
           children: [
-            const CustomTopBar(),
+            const CustomTopBar(phrase: 'Hello there', question: 'What do you want to eat today?',),
             Container(
-              margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-              width: 500,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Today's recommendations! ",
-                    style: TextStyle(
-                        fontFamily: 'SF Pro',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
-                  FoodList(),
-                  FoodCategoriesList(),
-                  MealList(),
+              width: 400,
+              height: 650,
+              child: ListView(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
+                    width: 800,
+                    height: 700,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Today's recommendations! ",
+                          style: TextStyle(
+                              fontFamily: 'SF Pro',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                        FoodList(),
+                        FoodCategoriesList(),
+                        MealList(),
+                      ],
+                    ),
+                  )
                 ],
               ),
             )
