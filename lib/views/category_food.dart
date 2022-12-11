@@ -41,10 +41,11 @@ class CategoryFood extends StatelessWidget {
               ],
             ),
           ),
-           Container(
+           SizedBox(
             height: 550,
             width: 400,
             child: ListView(
+              padding: const EdgeInsets.only(top: 0, bottom: 20),
               children: [
                 Row(
                   children: [
@@ -88,7 +89,8 @@ class CategoryFood extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          Container(
+            padding: const EdgeInsets.only(top: 5,),
             child: CupertinoButton.filled(
               onPressed: () {},
               child: const Text('Check your cart'),

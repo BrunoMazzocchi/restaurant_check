@@ -14,10 +14,11 @@ class MainApp extends StatelessWidget {
     return  Column(
           children: [
             const CustomTopBar(phrase: 'Hello there', question: 'What do you want to eat today?',),
-            Container(
+            SizedBox(
               width: 400,
               height: 650,
               child: ListView(
+                padding: const EdgeInsets.only(top: 0),
                 children: [
                   Container(
                     margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
