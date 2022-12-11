@@ -2,7 +2,9 @@
 
 A simple restaurant menu application.
 
+For the backend, I'm using the restaurant API 
 
+**Restaurant API**, [*@Restaurant API*](https://github.com/BrunoMazzocchi/restaurant_api).
 
 
 
