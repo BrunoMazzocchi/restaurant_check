@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../models/food_models.dart';
+import '../models/food_model.dart';
+
 
 class OpenFood extends StatelessWidget {
   final Food food;
@@ -29,9 +30,16 @@ class OpenFood extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(223, 226, 232, 1),
                     borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 2,
+                        offset: Offset(0, 10),
+                      ),
+                    ],
                   ),
                   child: Image(
-                    image: Image.network(food.image.toString()).image,
+                    image: Image.network(food.foodImage.toString()).image,
                   ),
                 ),
               ],
@@ -45,7 +53,7 @@ class OpenFood extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        food.name.toString(),
+                        food.foodName.toString(),
                         style: const TextStyle(
                           fontFamily: 'SF Pro',
                           fontWeight: FontWeight.normal,
@@ -64,13 +72,6 @@ class OpenFood extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(223, 226, 232, 1),
                         borderRadius: BorderRadius.circular(15),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10,
-                            offset: Offset(0, 10),
-                          ),
-                        ],
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -100,13 +101,7 @@ class OpenFood extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(223, 226, 232, 1),
                         borderRadius: BorderRadius.circular(15),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10,
-                            offset: Offset(0, 10),
-                          ),
-                        ],
+
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -149,13 +144,7 @@ class OpenFood extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(223, 226, 232, 1),
                         borderRadius: BorderRadius.circular(15),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10,
-                            offset: Offset(0, 10),
-                          ),
-                        ],
+
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -169,7 +158,7 @@ class OpenFood extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            food.time.toString(),
+                            food.preparationTime.toString(),
                             style: const TextStyle(
                               fontFamily: 'SF Pro',
                               fontWeight: FontWeight.bold,

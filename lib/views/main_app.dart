@@ -1,6 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
+import '../bloc/restaurant_bloc.dart';
+import '../models/category_model.dart';
+import '../models/food_model.dart';
+import '../models/meal_model.dart';
+import '../resources/database/restaurant_db.dart';
 import '../widgets/custom_top_bar.dart';
 import '../widgets/food_categories_list.dart';
 import '../widgets/food_list.dart';
@@ -11,6 +17,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return  Column(
           children: [
             const CustomTopBar(phrase: 'Hello there', question: 'What do you want to eat today?',),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_check/models/food_models.dart';
 import 'package:restaurant_check/views/open_food.dart';
+
+import '../models/food_model.dart';
 
 class FoodImageTimer extends StatelessWidget {
   final Food food;
@@ -26,7 +27,7 @@ class FoodImageTimer extends StatelessWidget {
             Image(
                 width: 90,
                 height: 90,
-                image: Image.network(food.image.toString()).image,
+                image: Image.network(food.foodImage.toString()).image,
                 fit: BoxFit.cover),
             Row(
               children: [
@@ -37,7 +38,7 @@ class FoodImageTimer extends StatelessWidget {
                       color: Colors.grey,
                       size: 25,
                     ),
-                    Text(food.time.toString()),
+                    Text(food.preparationTime.toString()),
                   ],
                 ),
               ],
@@ -46,8 +47,12 @@ class FoodImageTimer extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>  OpenFood(food: food,)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => OpenFood(
+                      food: food,
+                    )));
       },
     );
   }

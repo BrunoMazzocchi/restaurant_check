@@ -39,9 +39,12 @@ class _NavigationState extends State<Navigation> {
         ),
         child: BottomNavigationBar(
           items: const [
-            BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled), label: "Profile"),
-            BottomNavigationBarItem(icon: Icon(CupertinoIcons.shopping_cart), label: "Cart"),
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.profile_circled), label: "Profile"),
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.shopping_cart), label: "Cart"),
           ],
           onTap: onTabTapped,
           currentIndex: _currentIndex,

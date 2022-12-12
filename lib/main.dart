@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:restaurant_check/bloc/restaurant_bloc.dart';
 import 'package:restaurant_check/navigation.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
-      const MaterialApp(
-        home: Navigation(),
-      ),
+    const MyApp(),
   );
 }
 
@@ -19,12 +20,15 @@ class MyApp extends StatelessWidget {
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark));
 
-    return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'SF Pro',
-        primaryColor: Colors.lightGreenAccent[800],
+    return BlocProvider(
+      bloc: RestaurantMenuBloc(),
+      child: MaterialApp(
+        title: 'Restaurant Check',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const Navigation(),
       ),
-      home: const Navigation(),
     );
   }
 }
