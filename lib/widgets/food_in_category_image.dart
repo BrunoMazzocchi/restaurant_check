@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_check/models/food_models.dart';
-
+import '../models/food_model.dart';
 import '../views/open_food.dart';
 
 class FoodInCategoryImage extends StatelessWidget {
@@ -15,7 +14,7 @@ class FoodInCategoryImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        width: 300,
+        width: 400,
         height: 150,
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -27,24 +26,36 @@ class FoodInCategoryImage extends StatelessWidget {
               Image(
                   width: 100,
                   height: 100,
-                  image: Image.network(food.image.toString()).image),
-              Text(
-                food.time.toString(),
-                style: const TextStyle(
+                  image: Image.network(food.foodImage.toString()).image),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.av_timer_rounded,
+                    color: Colors.grey,
+                    size: 25,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(food.preparationTime.toString(),
+                  style: const TextStyle(
                     fontFamily: 'SF Pro',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: Colors.black45,
+                  ),)
+                ],
               ),
             ],
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                food.name.toString(),
+                food.foodName.toString(),
                 style: const TextStyle(
                   fontFamily: 'SF Pro',
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
               ),
@@ -58,18 +69,27 @@ class FoodInCategoryImage extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                     fontSize: 14,
                   ),
-                  maxLines: 5,
+                  maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text(
-                food.price.toString(),
-                style: const TextStyle(
-                  fontFamily: 'SF Pro',
-                  fontWeight: FontWeight.normal,
-                  fontSize: 20,
-                ),
-              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.attach_money_sharp,
+                    color: Colors.black,
+                    size: 25,
+                  ),
+                  Text(
+                    food.price.toString(),
+                    style: const TextStyle(
+                      fontFamily: 'SF Pro',
+                      fontWeight: FontWeight.normal,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ]),

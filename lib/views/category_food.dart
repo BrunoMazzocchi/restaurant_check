@@ -1,16 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:restaurant_check/models/category_model.dart';
 import 'package:restaurant_check/widgets/category_food_list.dart';
 import 'package:restaurant_check/widgets/custom_top_bar.dart';
 import 'package:restaurant_check/widgets/food_list.dart';
 
+import '../bloc/restaurant_bloc.dart';
+
 class CategoryFood extends StatelessWidget {
-  final String category;
+  final Category category;
 
   const CategoryFood({Key? key, required this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    RestaurantMenuBloc menuBloc = BlocProvider.of(context);
+
     return Scaffold(
       body: Column(
         children: [
@@ -25,7 +31,7 @@ class CategoryFood extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  category,
+                  category.categoryName.toString(),
                   style: const TextStyle(
                       fontFamily: 'SF Pro',
                       fontWeight: FontWeight.bold,
@@ -84,7 +90,7 @@ class CategoryFood extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-                  child: const CategoryFoodList(),
+                  child:  CategoryFoodList(categoryId: category.categoryId!.toInt()),
                 ),
               ],
             ),

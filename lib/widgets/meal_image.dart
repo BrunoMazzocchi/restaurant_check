@@ -1,21 +1,19 @@
 import 'package:flutter/cupertino.dart';
+import 'package:restaurant_check/models/meal_model.dart';
 
 class MealImage extends StatelessWidget {
-  final String networkImage;
-  final String mealName;
-  final String mealDescription;
+  final Meal meal;
 
-  const MealImage(
-      {Key? key,
-      required this.networkImage,
-      required this.mealName,
-      required this.mealDescription})
-      : super(key: key);
+  const MealImage({
+    Key? key,
+    required this.meal,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 370,
+      margin: const EdgeInsets.only(top: 20, bottom: 10),
+      width: 340,
       height: 100,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(223, 226, 232, 1),
@@ -23,18 +21,16 @@ class MealImage extends StatelessWidget {
       ),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
         Image(
-          image: Image.network(
-                  networkImage)
-              .image,
+          image: Image.network(meal.mealImage.toString()).image,
           width: 100,
           height: 100,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children:  [
+          children: [
             Text(
-              mealName,
+              meal.mealName.toString(),
               style: const TextStyle(
                 fontFamily: 'SF Pro',
                 fontWeight: FontWeight.bold,
@@ -44,7 +40,7 @@ class MealImage extends StatelessWidget {
             SizedBox(
               width: 200,
               child: Text(
-                mealDescription,
+                meal.description.toString(),
                 style: const TextStyle(
                   fontFamily: 'SF Pro',
                   fontWeight: FontWeight.normal,
