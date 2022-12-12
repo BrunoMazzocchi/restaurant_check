@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant_check/views/settings.dart';
 
 import '../models/food_model.dart';
 
@@ -14,6 +15,11 @@ class OpenFood extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -26,7 +32,7 @@ class OpenFood extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(top: 50, bottom: 10),
                   width: 500,
-                  height: 350,
+                  height:  340,
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(223, 226, 232, 1),
                     borderRadius: BorderRadius.circular(15),
@@ -179,6 +185,7 @@ class OpenFood extends StatelessWidget {
                         width: 350,
                         height: 200,
                         child: ListView(
+                          padding: const EdgeInsets.all(0),
                           children: [
                             Text(
                               food.description.toString(),
@@ -212,7 +219,14 @@ class OpenFood extends StatelessWidget {
                         ),
                         const Text('1'),
                         CupertinoButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            print('jp');
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Settings()));
+                          },
                           child: const Icon(
                             CupertinoIcons.add,
                             color: Colors.black,

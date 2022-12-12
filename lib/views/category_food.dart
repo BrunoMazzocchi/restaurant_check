@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:restaurant_check/models/category_model.dart';
 import 'package:restaurant_check/widgets/category_food_list.dart';
 import 'package:restaurant_check/widgets/custom_top_bar.dart';
 import 'package:restaurant_check/widgets/food_list.dart';
 
-import '../bloc/restaurant_bloc.dart';
 
 class CategoryFood extends StatelessWidget {
   final Category category;
@@ -15,8 +13,8 @@ class CategoryFood extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RestaurantMenuBloc menuBloc = BlocProvider.of(context);
-
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Column(
         children: [
@@ -48,8 +46,8 @@ class CategoryFood extends StatelessWidget {
             ),
           ),
            SizedBox(
-            height: 550,
-            width: 400,
+            height: height  * 0.63,
+            width: width,
             child: ListView(
               padding: const EdgeInsets.only(top: 0, bottom: 20),
               children: [
@@ -96,7 +94,7 @@ class CategoryFood extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 5,),
+            padding: const EdgeInsets.only(top: 2.5,),
             child: CupertinoButton.filled(
               onPressed: () {},
               child: const Text('Check your cart'),

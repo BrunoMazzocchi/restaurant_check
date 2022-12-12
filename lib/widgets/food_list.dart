@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:restaurant_check/bloc/restaurant_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../models/food_model.dart';
 import 'food_image_timer.dart';
@@ -41,7 +42,18 @@ class _FoodListState extends State<FoodList> {
               },
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return SizedBox(
+              width: 200.0,
+              height: 100.0,
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: const Card(
+                  color: Colors.white,
+                  child: Text('Loading'),
+                ),
+              ),
+            );
           }
         },
       ),

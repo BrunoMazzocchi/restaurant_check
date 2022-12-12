@@ -15,7 +15,7 @@ class FoodInCategoryImage extends StatelessWidget {
     return InkWell(
       child: Container(
         width: 400,
-        height: 150,
+        height: 140,
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             color: Color.fromRGBO(223, 226, 232, 1)),

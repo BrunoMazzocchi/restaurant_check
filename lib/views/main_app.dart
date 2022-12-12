@@ -18,19 +18,21 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return  Column(
           children: [
             const CustomTopBar(phrase: 'Hello there', question: 'What do you want to eat today?',),
             SizedBox(
-              width: 400,
-              height: 650,
+              width: width,
+              height: height - 212,
               child: ListView(
                 padding: const EdgeInsets.only(top: 0),
                 children: [
                   Container(
                     margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-                    width: 800,
-                    height: 700,
+                    width: width,
+                    height: height,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
