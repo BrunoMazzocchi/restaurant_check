@@ -42,6 +42,7 @@ dependencies:
   generic_bloc_provider: ^2.1.1
   http: ^0.13.5
   sqflite: ^2.2.2
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

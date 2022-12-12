@@ -10,7 +10,11 @@ class MealList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     RestaurantMenuBloc menuBloc = BlocProvider.of(context);
+
     return Container(
       margin: const EdgeInsets.only(
         top: 20,
@@ -31,8 +35,8 @@ class MealList extends StatelessWidget {
                 return Column(
                   children: [
                     SizedBox(
-
-                      height: 335,
+                      width: width,
+                      height: ((height * 1.4) - 208) / 2,
                       child: ListView.builder(
                         padding: const EdgeInsets.only(top: 0),
                         scrollDirection: Axis.vertical,
@@ -43,9 +47,6 @@ class MealList extends StatelessWidget {
                             children: [
                               MealImage(
                                 meal: snapshot.data![index],
-                              ),
-                              const SizedBox(
-                                width: 20,
                               ),
                             ],
                           );

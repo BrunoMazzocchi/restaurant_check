@@ -1,10 +1,8 @@
 # RestaurantCheck
 
-A simple restaurant menu application.
+Welcome to the Restaurant App Demo, a sample project that showcases the features and capabilities of a restaurant app. This app allows users to browse a restaurant's menu, add items to their cart, and place orders for pickup or delivery. The app also provides features for restaurant owners, such as managing orders and updating the menu.
 
-For the backend, I'm using the restaurant API 
-
-**Restaurant API**, [*@Restaurant API*](https://github.com/BrunoMazzocchi/restaurant_api).
+This demo project is built using Flutter, a popular open-source framework for building cross-platform mobile apps. The app uses a clean and modern design, with smooth animations and intuitive user interactions. The code is well-organized and easy to understand, making it a great starting point for anyone looking to build their own restaurant app.
 
 
 
@@ -15,7 +13,21 @@ For the backend, I'm using the restaurant API
 </h1>
 
 
+# Features
+
+Browse a restaurant's menu and add items to your cart
+Place orders for pickup or delivery
+View your order history and track the status of your orders
+Manage your account and update your personal information
+Restaurant owners can view and manage incoming orders
+Restaurant owners can update the menu and change item availability
+
+# Tech
+This demo project is built using Flutter, a popular open-source framework for building cross-platform mobile apps. The app uses a clean and modern design, with smooth animations and intuitive user interactions. The code is well-organized and easy to understand, making it a great starting point for anyone looking to build their own restaurant app.
+
+
+For the backend, I'm using the restaurant API
+
+**Restaurant API**, [*@Restaurant API*](https://github.com/BrunoMazzocchi/restaurant_api).
+
 UI & UX by **Joshua Campos**, [*@Joshdroid250*](https://github.com/Joshdroid250).
-
-
-
