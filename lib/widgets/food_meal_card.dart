@@ -22,7 +22,7 @@ class FoodMealCard extends StatelessWidget {
         width: width - 40,
         height: 100,
         decoration: BoxDecoration(
-          color: const Color.fromRGBO(223, 226, 232, 1),
+          color: const Color.fromRGBO(222, 219, 216, 1),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [

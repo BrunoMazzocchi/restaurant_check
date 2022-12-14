@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_check/models/category_model.dart';
 import 'package:restaurant_check/views/category_food.dart';
@@ -20,7 +19,7 @@ class FoodCategoryImage extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.grey[200],
+          color: Color.fromRGBO(222, 219, 216, 1),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

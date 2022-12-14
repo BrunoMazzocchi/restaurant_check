@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:restaurant_check/widgets/food_in_category_image.dart';
+import 'package:restaurant_check/widgets/food_in_specific_list.dart';
 
 import '../bloc/restaurant_bloc.dart';
 import '../models/food_model.dart';
@@ -45,7 +45,7 @@ class CategoryFoodList extends StatelessWidget {
                     return Column(
                       children: [
                         for (var food in foods)
-                          FoodInCategoryImage(
+                          FoodInSpecificList(
                             food: food,
                           ),
                       ],

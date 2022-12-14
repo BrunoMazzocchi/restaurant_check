@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../models/food_model.dart';
 import '../views/open_food.dart';
 
-class FoodInCategoryImage extends StatelessWidget {
+class FoodInSpecificList extends StatelessWidget {
   final Food food;
 
-  const FoodInCategoryImage({
+  const FoodInSpecificList({
     Key? key,
     required this.food,
   }) : super(key: key);
@@ -19,7 +19,7 @@ class FoodInCategoryImage extends StatelessWidget {
         height: 140,
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: Color.fromRGBO(223, 226, 232, 1)),
+            color: Color.fromRGBO(222, 219, 216, 1)),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
