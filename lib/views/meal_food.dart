@@ -1,25 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:restaurant_check/models/category_model.dart';
 import 'package:restaurant_check/widgets/category_food_list.dart';
 import 'package:restaurant_check/widgets/custom_top_bar.dart';
 import 'package:restaurant_check/widgets/food_list.dart';
+import 'package:restaurant_check/widgets/meal_list.dart';
 
-class CategoryFood extends StatelessWidget {
-  final Category category;
+import '../models/meal_model.dart';
+import '../widgets/meal_food_list.dart';
 
-  const CategoryFood({Key? key, required this.category}) : super(key: key);
+
+class MealFood extends StatelessWidget {
+  final Meal meal;
+
+  const MealFood({Key? key, required this.meal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
-        body: Container(
-      width: width,
-      height: height,
-      child: Column(
+      body: Column(
         children: [
           const CustomTopBar(
             phrase: "Let's order, ",
@@ -27,12 +27,12 @@ class CategoryFood extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-            width: width,
+            width: 500,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  category.categoryName.toString(),
+                  meal.mealName.toString(),
                   style: const TextStyle(
                       fontFamily: 'SF Pro',
                       fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class CategoryFood extends StatelessWidget {
                   children: [
                     Container(
                       margin:
-                          const EdgeInsets.only(top: 30, left: 20, right: 20),
+                      const EdgeInsets.only(top: 30, left: 20, right: 20),
                       width: 300,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,16 +92,14 @@ class CategoryFood extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-                  child: CategoryFoodList(
-                      categoryId: category.categoryId!.toInt()),
+                  child: MealFoodList(
+                      mealId: meal.mealId!.toInt(),),
                 ),
               ],
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(
-              top: 2.5,
-            ),
+            padding: const EdgeInsets.only(top: 3,),
             child: CupertinoButton.filled(
               onPressed: () {},
               child: const Text('Check your cart'),
@@ -109,6 +107,6 @@ class CategoryFood extends StatelessWidget {
           ),
         ],
       ),
-    ));
+    );
   }
 }

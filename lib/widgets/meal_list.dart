@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:restaurant_check/widgets/meal_image.dart';
+import 'package:restaurant_check/widgets/food_meal_card.dart';
 
 import '../bloc/restaurant_bloc.dart';
 import '../models/meal_model.dart';
@@ -34,25 +34,10 @@ class MealList extends StatelessWidget {
               if (snapshot.hasData) {
                 return Column(
                   children: [
-                    SizedBox(
-                      width: width,
-                      height: ((height * 1.4) - 208) / 2,
-                      child: ListView.builder(
-                        padding: const EdgeInsets.only(top: 0),
-                        scrollDirection: Axis.vertical,
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              MealImage(
-                                meal: snapshot.data![index],
-                              ),
-                            ],
-                          );
-                        },
+                    for (var meal in snapshot.data!)
+                      FoodMealCard(
+                        meal: meal,
                       ),
-                    )
                   ],
                 );
               } else {

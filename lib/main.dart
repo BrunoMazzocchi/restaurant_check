@@ -5,7 +5,7 @@ import 'package:restaurant_check/bloc/restaurant_bloc.dart';
 import 'package:restaurant_check/navigation.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     const MyApp(),
   );
@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark));
-
     return BlocProvider(
       bloc: RestaurantMenuBloc(),
       child: MaterialApp(

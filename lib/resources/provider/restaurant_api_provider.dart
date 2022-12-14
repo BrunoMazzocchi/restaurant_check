@@ -46,6 +46,25 @@ class RestaurantAPIProvider {
     return foodList;
   }
 
+  Future<List<Food>> fetchFoodByMealId(int mealId) async {
+    List<Food> foodList = [];
+    try {
+      final response =
+      await http.get(Uri.parse('http://192.168.1.5:8000/api/food/byMeal/$mealId'));
+
+      for (var i = 0; i < jsonDecode(response.body).length; i++) {
+        if (response.statusCode == 200) {
+          foodList.add(Food.fromJson(jsonDecode(response.body)[i]));
+        }
+      }
+    } catch (error, stacktrace) {
+      print("Exception occurred: $error Stacktrace: $stacktrace");
+
+      throw Exception('Failed to load food');
+    }
+    return foodList;
+  }
+
 
   Future<List<Category>> fetchCategory() async {
     List<Category> categoryList = [];

@@ -4,8 +4,7 @@ import 'package:restaurant_check/views/settings.dart';
 
 import '../models/food_model.dart';
 
-
-class OpenFood extends StatelessWidget {
+class OpenFood extends StatefulWidget {
   final Food food;
 
   const OpenFood({
@@ -14,11 +13,32 @@ class OpenFood extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<OpenFood> createState() => _OpenFoodState();
+}
 
+class _OpenFoodState extends State<OpenFood> {
+  int counter = 0;
+
+  void operation(int value) {
+    if (value == -1 && counter > 0) {
+      setState(() {
+        counter--;
+      });
+    } else if (value == 1) {
+      setState(() {
+        counter++;
+      });
+    } else {
+      setState(() {
+        counter = 0;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
 
     return Scaffold(
       body: Container(
@@ -32,7 +52,7 @@ class OpenFood extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(top: 50, bottom: 10),
                   width: 500,
-                  height:  340,
+                  height: 340,
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(223, 226, 232, 1),
                     borderRadius: BorderRadius.circular(15),
@@ -45,7 +65,8 @@ class OpenFood extends StatelessWidget {
                     ],
                   ),
                   child: Image(
-                    image: Image.network(food.foodImage.toString()).image,
+                    image:
+                        Image.network(widget.food.foodImage.toString()).image,
                   ),
                 ),
               ],
@@ -54,18 +75,24 @@ class OpenFood extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.only(top: 20, bottom: 10),
-                  width: 500,
-                  height: 100,
+                  width: width,
+                  height: 80,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        food.foodName.toString(),
-                        style: const TextStyle(
-                          fontFamily: 'SF Pro',
-                          fontWeight: FontWeight.normal,
-                          fontSize: 30,
+                      SizedBox(
+                        height: 40,
+                        child: Text(
+                          widget.food.foodName.toString(),
+                          style: const TextStyle(
+                            fontFamily: 'SF Pro',
+                            fontWeight: FontWeight.normal,
+                            fontSize: 30,
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -91,7 +118,7 @@ class OpenFood extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            food.calories.toString(),
+                            widget.food.calories.toString(),
                             style: const TextStyle(
                               fontFamily: 'SF Pro',
                               fontWeight: FontWeight.bold,
@@ -107,7 +134,6 @@ class OpenFood extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(223, 226, 232, 1),
                         borderRadius: BorderRadius.circular(15),
-
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -132,7 +158,7 @@ class OpenFood extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                food.price.toString(),
+                                widget.food.price.toString(),
                                 style: const TextStyle(
                                   fontFamily: 'SF Pro',
                                   fontWeight: FontWeight.bold,
@@ -150,7 +176,6 @@ class OpenFood extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(223, 226, 232, 1),
                         borderRadius: BorderRadius.circular(15),
-
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -164,7 +189,7 @@ class OpenFood extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            food.preparationTime.toString(),
+                            widget.food.preparationTime.toString(),
                             style: const TextStyle(
                               fontFamily: 'SF Pro',
                               fontWeight: FontWeight.bold,
@@ -188,7 +213,7 @@ class OpenFood extends StatelessWidget {
                           padding: const EdgeInsets.all(0),
                           children: [
                             Text(
-                              food.description.toString(),
+                              widget.food.description.toString(),
                               style: const TextStyle(
                                 fontFamily: 'SF Pro',
                                 fontWeight: FontWeight.normal,
@@ -201,43 +226,45 @@ class OpenFood extends StatelessWidget {
                     ],
                   ),
                 ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                CupertinoButton.filled(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Settings()));
+                  },
+                  child: const Text('Add to cart'),
+                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    CupertinoButton.filled(
-                      onPressed: () {},
-                      child: const Text('Add to cart'),
+                    CupertinoButton(
+                      onPressed: () {
+                        operation(-1);
+                      },
+                      child: const Icon(
+                        CupertinoIcons.minus,
+                        color: Colors.black,
+                      ),
                     ),
-                    Row(
-                      children: [
-                        CupertinoButton(
-                          onPressed: () {},
-                          child: const Icon(
-                            CupertinoIcons.minus,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const Text('1'),
-                        CupertinoButton(
-                          onPressed: () {
-                            print('jp');
-
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Settings()));
-                          },
-                          child: const Icon(
-                            CupertinoIcons.add,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    )
+                    Text('$counter'),
+                    CupertinoButton(
+                      onPressed: () {
+                        operation(1);
+                      },
+                      child: const Icon(
+                        CupertinoIcons.add,
+                        color: Colors.black,
+                      ),
+                    ),
                   ],
                 )
               ],
-            ),
+            )
           ],
         ),
       ),

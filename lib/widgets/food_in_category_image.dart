@@ -14,6 +14,7 @@ class FoodInCategoryImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
+        margin: const EdgeInsets.only(bottom: 20),
         width: 400,
         height: 140,
         decoration: const BoxDecoration(
@@ -51,17 +52,22 @@ class FoodInCategoryImage extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                food.foodName.toString(),
-                style: const TextStyle(
-                  fontFamily: 'SF Pro',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+              SizedBox(
+                width: 200,
+                child: Text(
+                  food.foodName.toString(),
+                  style: const TextStyle(
+                    fontFamily: 'SF Pro',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               SizedBox(
                 width: 200,
-                height: 80,
+                height: 60,
                 child: Text(
                   food.description.toString(),
                   style: const TextStyle(
@@ -69,7 +75,7 @@ class FoodInCategoryImage extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                     fontSize: 14,
                   ),
-                  maxLines: 4,
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

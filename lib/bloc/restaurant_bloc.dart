@@ -10,12 +10,18 @@ class RestaurantMenuBloc implements Bloc {
   final _restaurantAPIRepository = RestaurantAPIRepository();
 
   Future<List<Food>> fetchFood() {
+    print('hola');
     return _restaurantAPIRepository.fetchFood();
   }
 
   Future<List<Food>> fetchFoodByCategoryId(int categoryId) {
     return _restaurantAPIRepository.fetchFoodByCategoryId(categoryId);
   }
+
+  Future<List<Food>> fetchFoodByMealId(int mealId) {
+    return _restaurantAPIRepository.fetchFoodByMealId(mealId);
+  }
+
 
   Future<List<Category>> fetchCategory() {
     return _restaurantAPIRepository.fetchFoodByCategory();

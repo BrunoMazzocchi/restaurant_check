@@ -15,6 +15,11 @@ class RestaurantAPIRepository {
     return _provider.fetchFoodByCategoryId(categoryId);
   }
 
+  Future<List<Food>> fetchFoodByMealId(int mealId) {
+    return _provider.fetchFoodByMealId(mealId);
+  }
+
+
   Future<List<Category>> fetchFoodByCategory() {
     return _provider.fetchCategory();
   }

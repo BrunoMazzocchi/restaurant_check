@@ -31,25 +31,34 @@ class _NavigationState extends State<Navigation> {
     ];
 
     return Scaffold(
-      body: widgetsChildren[_currentIndex],
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Colors.white,
-          primaryColor: Colors.lightGreenAccent[800],
-        ),
-        child: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.home), label: "Home"),
-            BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.profile_circled), label: "Profile"),
-            BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.shopping_cart), label: "Cart"),
-          ],
-          onTap: onTabTapped,
-          currentIndex: _currentIndex,
-        ),
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        selectedIndex: _currentIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(CupertinoIcons.home),
+            label: "Home",
+          ),
+          NavigationDestination(
+            icon: Icon(CupertinoIcons.profile_circled),
+            label: "Profile",
+          ),
+          NavigationDestination(
+            icon: Icon(CupertinoIcons.shopping_cart),
+            label: "Cart",
+          ),
+        ],
       ),
+      body: <Widget>[
+        const MainApp(),
+        const Profile(),
+        const Settings(),
+        const Settings(),
+      ][_currentIndex],
     );
   }
 }

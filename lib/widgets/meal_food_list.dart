@@ -4,13 +4,14 @@ import 'package:restaurant_check/widgets/food_in_category_image.dart';
 
 import '../bloc/restaurant_bloc.dart';
 import '../models/food_model.dart';
+import '../resources/database/restaurant_db.dart';
 
-class CategoryFoodList extends StatelessWidget {
-  final int categoryId;
+class MealFoodList extends StatelessWidget {
+  final int mealId;
 
-  const CategoryFoodList({
+  const MealFoodList({
     Key? key,
-    required this.categoryId,
+    required this.mealId,
   }) : super(key: key);
 
   @override
@@ -32,14 +33,14 @@ class CategoryFoodList extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.only(top: 20),
             child: FutureBuilder<List<Food>>(
-              future: menuBloc.fetchFoodByCategoryId(categoryId),
+              future: menuBloc.fetchFoodByMealId(mealId),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
                   case ConnectionState.active:
                     return const Text(
-                        "Right now there is no food in this category");
+                        "Right now there is no food in this meal category");
                   case ConnectionState.done:
                     final foods = snapshot.data!;
                     return Column(
