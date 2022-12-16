@@ -74,6 +74,7 @@ flutter:
     - assets/img/food/4.png
     - assets/img/food/5.png
     - assets/img/p1.png
+    - assets/img/ui_drawkit/drawkit_1.png
 
 
     # An image asset can refer to one or more resolution-specific "variants", see

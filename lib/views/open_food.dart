@@ -54,7 +54,7 @@ class _OpenFoodState extends State<OpenFood> {
                   width: 500,
                   height: 340,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(223, 226, 232, 1),
+                    color: const Color.fromRGBO(222, 219, 216, 1),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
@@ -103,7 +103,7 @@ class _OpenFoodState extends State<OpenFood> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: const Color.fromRGBO(223, 226, 232, 1),
+                        color: const Color.fromRGBO(222, 219, 216, 1),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Column(
@@ -132,7 +132,7 @@ class _OpenFoodState extends State<OpenFood> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: const Color.fromRGBO(223, 226, 232, 1),
+                        color: const Color.fromRGBO(222, 219, 216, 1),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Column(
@@ -174,7 +174,7 @@ class _OpenFoodState extends State<OpenFood> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: const Color.fromRGBO(223, 226, 232, 1),
+                        color: const Color.fromRGBO(222, 219, 216, 1),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Column(

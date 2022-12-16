@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:restaurant_check/bloc/restaurant_bloc.dart';
 import 'package:restaurant_check/navigation.dart';
+import 'package:restaurant_check/views/sign_in_view.dart';
 
 void main() {
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
-        home: const Navigation(),
+        home: const SignInView(),
       ),
     );
   }
