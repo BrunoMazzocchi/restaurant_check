@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:restaurant_check/models/category_model.dart';
 import 'package:restaurant_check/models/food_model.dart';
@@ -8,11 +9,18 @@ import '../../models/meal_model.dart';
 import '../database/restaurant_db.dart';
 
 class RestaurantAPIProvider {
+  FlutterSecureStorage storage = const FlutterSecureStorage();
+
+
   Future<List<Food>> fetchFood() async {
     List<Food> foodList = [];
     try {
       final response =
-          await http.get(Uri.parse('http://192.168.1.5:8000/api/food/all'));
+          await http.get(Uri.parse('http://192.168.1.5:8000/api/food/all'),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ${await storage.read(key: 'jwt')}',
+            },);
 
       for (var i = 0; i < jsonDecode(response.body).length; i++) {
         if (response.statusCode == 200) {
@@ -31,7 +39,11 @@ class RestaurantAPIProvider {
     List<Food> foodList = [];
     try {
       final response =
-      await http.get(Uri.parse('http://192.168.1.5:8000/api/food/byCategory/$categoryId'));
+      await http.get(Uri.parse('http://192.168.1.5:8000/api/food/byCategory/$categoryId'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${await storage.read(key: 'jwt')}',
+        },);
 
       for (var i = 0; i < jsonDecode(response.body).length; i++) {
         if (response.statusCode == 200) {
@@ -50,7 +62,11 @@ class RestaurantAPIProvider {
     List<Food> foodList = [];
     try {
       final response =
-      await http.get(Uri.parse('http://192.168.1.5:8000/api/food/byMeal/$mealId'));
+      await http.get(Uri.parse('http://192.168.1.5:8000/api/food/byMeal/$mealId'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${await storage.read(key: 'jwt')}',
+        },);
 
       for (var i = 0; i < jsonDecode(response.body).length; i++) {
         if (response.statusCode == 200) {
@@ -70,7 +86,11 @@ class RestaurantAPIProvider {
     List<Category> categoryList = [];
     try {
       final response =
-          await http.get(Uri.parse('http://192.168.1.5:8000/api/category/all'));
+          await http.get(Uri.parse('http://192.168.1.5:8000/api/category/all'),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ${await storage.read(key: 'jwt')}',
+            },);
 
       for (var i = 0; i < jsonDecode(response.body).length; i++) {
         if (response.statusCode == 200) {
@@ -89,7 +109,11 @@ class RestaurantAPIProvider {
     List<Meal> mealList = [];
     try {
       final response =
-      await http.get(Uri.parse('http://192.168.1.5:8000/api/meal/all'));
+      await http.get(Uri.parse('http://192.168.1.5:8000/api/meal/all'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${await storage.read(key: 'jwt')}',
+        },);
 
       for (var i = 0; i < jsonDecode(response.body).length; i++) {
         if (response.statusCode == 200) {
