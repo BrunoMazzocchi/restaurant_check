@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:restaurant_check/bloc/restaurant_bloc.dart';
-import 'package:restaurant_check/navigation.dart';
-import 'package:restaurant_check/views/sign_in_view.dart';
+import 'package:restaurant_check/user/screens/sign_in_view.dart';
+
+import 'bloc/restaurant_bloc.dart';
 
 void main() {
 

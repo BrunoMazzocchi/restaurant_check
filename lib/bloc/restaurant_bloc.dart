@@ -1,17 +1,17 @@
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
-import '../models/category_model.dart';
-import '../models/food_model.dart';
-import '../models/meal_model.dart';
-import '../resources/repository/restaurant_api_repository.dart';
-import '../resources/repository/user_security_repository.dart';
+import '../menu/domain/models/category_model.dart';
+import '../menu/domain/models/food_model.dart';
+import '../menu/domain/models/meal_model.dart';
+import '../menu/domain/repository/restaurant_api_repository.dart';
+import '../user/domain/models/user_model.dart';
+import '../user/domain/repository/user_security_repository.dart';
 
 class RestaurantMenuBloc implements Bloc {
   final _restaurantAPIRepository = RestaurantAPIRepository();
   final _userSecurityRepository = UserSecurityRepository();
 
   Future<List<Food>> fetchFood() {
-    print('hola');
     return _restaurantAPIRepository.fetchFood();
   }
 
@@ -31,12 +31,24 @@ class RestaurantMenuBloc implements Bloc {
     return _restaurantAPIRepository.fetchMeal();
   }
 
-  Future<int> checkSecurityData(String email, password) {
-    return _userSecurityRepository.checkSecurityData(email, password);
+  Future<int> fetchUserJwt(String email, password) {
+    return _userSecurityRepository.fetchUserJwt(email, password);
   }
 
+  Future<User?> fetchUser() {
+    return _userSecurityRepository.fetchUser();
+  }
+
+  Future<int> logOutUser() {
+    return _userSecurityRepository.logOutUser();
+  }
+
+  Future<int> isValid() {
+    return _userSecurityRepository.isValid();
+  }
   @override
   void dispose() {
     // TODO: implement dispose
   }
 }
+
