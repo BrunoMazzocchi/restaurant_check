@@ -1,19 +1,28 @@
 import 'package:flutter/cupertino.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_check/menu/widgets/food_meal_card.dart';
 
-import '../../bloc/restaurant_bloc.dart';
+import '../domain/bloc/menu_bloc.dart';
 import '../domain/models/meal_model.dart';
 
-class MealList extends StatelessWidget {
+class MealList extends StatefulWidget {
   const MealList({Key? key}) : super(key: key);
 
+
+
+  @override
+  State<MealList> createState() => _MealListState();
+}
+
+class _MealListState extends State<MealList> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    RestaurantMenuBloc menuBloc = BlocProvider.of(context);
+    late Future<List<Meal>> data = Provider.of<MenuBloc>(context, listen: false)
+        .fetchMeal();
+
 
     return Container(
       margin: const EdgeInsets.only(
@@ -29,7 +38,7 @@ class MealList extends StatelessWidget {
                 fontSize: 20,
               )),
           FutureBuilder<List<Meal>>(
-            future: menuBloc.fetchMeal(),
+            future: data,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(

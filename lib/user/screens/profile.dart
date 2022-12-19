@@ -1,23 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_check/bloc/restaurant_bloc.dart';
 import 'package:restaurant_check/user/screens/sign_in_view.dart';
 
 import '../../menu/widgets/order.dart';
+import '../domain/bloc/user_bloc.dart';
 import '../domain/models/user_model.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
   @override
+  State<Profile> createState() => _Profile();
+}
+
+class _Profile extends State<Profile> {
+
+  late Future<User?> data = Provider.of<UserBloc>(context, listen: false)
+      .fetchUser();
+
+  @override
   Widget build(BuildContext context) {
-    RestaurantMenuBloc menuBloc = BlocProvider.of(context);
+    UserBloc userBloc = Provider.of<UserBloc>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
     return FutureBuilder<User?>(
-        future: menuBloc.fetchUser(),
+        future: data,
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -73,7 +84,7 @@ class Profile extends StatelessWidget {
                               ),
                               IconButton(
                                 onPressed: () {
-                                  menuBloc.logOutUser();
+                                  userBloc.logOutUser();
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

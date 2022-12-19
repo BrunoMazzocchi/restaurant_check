@@ -17,7 +17,7 @@ class CategoryFood extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        body: Container(
+        body: SizedBox(
       width: width,
       height: height,
       child: Column(

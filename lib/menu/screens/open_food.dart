@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../main/screens/settings.dart';
+import '../domain/bloc/menu_bloc.dart';
 import '../domain/models/food_model.dart';
 
 class OpenFood extends StatefulWidget {

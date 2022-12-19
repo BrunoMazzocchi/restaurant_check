@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:restaurant_check/bloc/restaurant_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_check/menu/domain/bloc/menu_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../domain/models/food_model.dart';
@@ -14,15 +14,17 @@ class FoodList extends StatefulWidget {
 }
 
 class _FoodListState extends State<FoodList> {
+
+  late Future<List<Food>> data = Provider.of<MenuBloc>(context, listen: false)
+      .fetchFood();
+
   @override
   Widget build(BuildContext context) {
-
-
     return Container(
       margin: const EdgeInsets.only(top: 20),
       height: 140,
       child: FutureBuilder<List<Food>>(
-        future: BlocProvider.of<RestaurantMenuBloc>(context).fetchFood(),
+        future: data,
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:

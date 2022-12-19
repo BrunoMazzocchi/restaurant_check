@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_check/menu/widgets/food_in_specific_list.dart';
-
-import '../../bloc/restaurant_bloc.dart';
+import '../domain/bloc/menu_bloc.dart';
 import '../domain/models/food_model.dart';
 
-class MealFoodList extends StatelessWidget {
+class MealFoodList extends StatefulWidget {
   final int mealId;
 
   const MealFoodList({
@@ -14,8 +13,15 @@ class MealFoodList extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<MealFoodList> createState() => _MealFoodListState();
+}
+
+class _MealFoodListState extends State<MealFoodList> {
+  late Future<List<Food>> data = Provider.of<MenuBloc>(context, listen: false)
+      .fetchFoodByMealId(widget.mealId);
+  @override
   Widget build(BuildContext context) {
-    RestaurantMenuBloc menuBloc = BlocProvider.of(context);
+    MenuBloc menuBloc = Provider.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,7 +38,7 @@ class MealFoodList extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.only(top: 20),
             child: FutureBuilder<List<Food>>(
-              future: menuBloc.fetchFoodByMealId(mealId),
+              future: data,
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:

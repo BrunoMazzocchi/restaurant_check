@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_check/main/widgets/navigation.dart';
 
-import '../../bloc/restaurant_bloc.dart';
+import '../domain/bloc/user_bloc.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({Key? key}) : super(key: key);
@@ -17,25 +18,19 @@ class _SignInViewState extends State<SignInView> {
   late int statusCode;
   late double width;
   late double height;
-  RestaurantMenuBloc menuBloc = RestaurantMenuBloc();
 
-  late Future<int> isValid;
-
-
-  @override
-  void initState() {
-    isValid = menuBloc.isValid();
-    // TODO: implement initState
-    super.initState();
-  }
+  late Future<int> isValid =
+      Provider.of<UserBloc>(context, listen: false).isValid();
 
   @override
   Widget build(BuildContext context) {
+    UserBloc userBloc = Provider.of<UserBloc>(context);
+
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
 
     void checkSecurityData(String email, String password) async {
-      menuBloc
+      userBloc
           .fetchUserJwt(emailController.text, passwordController.text)
           .then((value) {
         statusCode = value;

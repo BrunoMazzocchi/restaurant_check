@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-
-import '../../bloc/restaurant_bloc.dart';
+import 'package:provider/provider.dart';
+import '../domain/bloc/menu_bloc.dart';
 import '../domain/models/category_model.dart';
 import 'food_category_card.dart';
 
 
-class FoodCategoriesList extends StatelessWidget {
+class FoodCategoriesList extends StatefulWidget {
   const FoodCategoriesList({Key? key}) : super(key: key);
+
+
+  @override
+  State<FoodCategoriesList> createState() => _FoodCategoryState();
+}
+
+class _FoodCategoryState extends State<FoodCategoriesList> {
+
+  late Future<List<Category>> data = Provider.of<MenuBloc>(context, listen: false)
+      .fetchCategory();
 
   @override
   Widget build(BuildContext context)  {
-    RestaurantMenuBloc menuBloc = BlocProvider.of(context);
-
 
     return Container(
       height: 100,
@@ -34,7 +41,7 @@ class FoodCategoriesList extends StatelessWidget {
             margin: const EdgeInsets.only(top: 20),
             height: 50,
             child: FutureBuilder<List<Category>>(
-              future: menuBloc.fetchCategory(),
+              future: data,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
@@ -62,4 +69,5 @@ class FoodCategoriesList extends StatelessWidget {
       ),
     );
   }
+
 }
