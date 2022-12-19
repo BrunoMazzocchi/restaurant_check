@@ -7,9 +7,13 @@ This demo project is built using Flutter, a popular open-source framework for bu
 
 
 <h1 align="center">
-<img src="https://user-images.githubusercontent.com/68037905/206918371-d97e5d4e-4693-4fbc-b4d5-ef3988dbb422.png" width="200" height="450"/>
-<img src="https://user-images.githubusercontent.com/68037905/206918373-1acdb702-f5b8-4a11-9f83-352c6fef0ce8.png" width="200" height="450"/>
-<img src="https://user-images.githubusercontent.com/68037905/206918374-e8a86a0e-3256-41a2-b72d-a05661781afa.png" width="200" height="450"/>
+<img src="https://user-images.githubusercontent.com/68037905/208331911-3a9598df-300e-4da7-9b54-c772a369813f.png" width="170" height="350"/>
+<img src="https://user-images.githubusercontent.com/68037905/208331914-e8d2d979-c595-45ee-8868-add057f467eb.png" width="170" height="350"/>
+<img src="https://user-images.githubusercontent.com/68037905/208331916-735dec02-6517-4801-b5f9-7ec398e2d253.png" width="170" height="350"/>
+<img src="https://user-images.githubusercontent.com/68037905/208331918-12cdd88d-c4c3-4d39-aea9-cf15636818d7.png" width="170" height="350"/>
+<img src="https://user-images.githubusercontent.com/68037905/208331919-a0a827a4-6abe-450d-97cd-947d0017dc44.png" width="170" height="350"/>
+
+
 </h1>
 
 
