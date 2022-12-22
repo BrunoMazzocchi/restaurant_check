@@ -37,7 +37,7 @@ class _SignInViewState extends State<SignInView> {
         switch (statusCode) {
           case 200:
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Navigation()));
+                MaterialPageRoute(builder: (context) =>  const Navigation(index: 0,)));
             break;
           case 401:
             showDialog(
@@ -214,7 +214,7 @@ class _SignInViewState extends State<SignInView> {
             statusCode = snapshot.data!;
             switch (statusCode) {
               case 200:
-                return const Navigation();
+                return const Navigation(index: 0,);
               case 401:
                 return signIn();
             }

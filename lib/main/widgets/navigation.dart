@@ -1,12 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant_check/cart/screens/main_cart.dart';
 import 'package:restaurant_check/user/screens/profile.dart';
 
 import '../screens/main_app.dart';
-import '../screens/settings.dart';
 
 class Navigation extends StatefulWidget {
-  const Navigation({Key? key}) : super(key: key);
+  final int index;
+
+  const Navigation({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
 
   @override
   State<Navigation> createState() => _NavigationState();
@@ -42,7 +47,7 @@ class _NavigationState extends State<Navigation> {
       ),
       body: <Widget>[
         const MainApp(),
-        const Settings(),
+        const MainCart(),
         const Profile(),
       ][_currentIndex],
     );

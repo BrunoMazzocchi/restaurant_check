@@ -1,14 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Order extends StatefulWidget {
-  const Order({Key? key}) : super(key: key);
+import '../../cart/domain/models/order_model.dart';
+
+class OrderCard extends StatefulWidget {
+  final Order order;
+
+  const OrderCard({
+    Key? key,
+    required this.order,
+  }) : super(key: key);
 
   @override
-  State<Order> createState() => _OrderState();
+  State<OrderCard> createState() => _OrderCardState();
 }
 
-class _OrderState extends State<Order> {
+class _OrderCardState extends State<OrderCard> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -42,12 +49,12 @@ class _OrderState extends State<Order> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Text(
-                      'Order #1',
-                      style: TextStyle(
+                      "Order #${widget.order.orderId}",
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 18,
                           fontFamily: 'SF Pro',
                           color: Colors.black),
                     ),
@@ -61,11 +68,11 @@ class _OrderState extends State<Order> {
                       fontFamily: 'SF Pro',
                       color: Colors.blueGrey),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 200,
                   child: Text(
-                    '134 abc street, abc city, abc state, abc country',
-                    style: TextStyle(
+                    "${widget.order.address}",
+                    style: const TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 15,
                         fontFamily: 'SF Pro',
@@ -83,8 +90,8 @@ class _OrderState extends State<Order> {
                 height: 20,
               ),
               Row(
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Status: ',
                     style: TextStyle(
                         fontWeight: FontWeight.normal,
@@ -93,8 +100,8 @@ class _OrderState extends State<Order> {
                         color: Colors.blueGrey),
                   ),
                   Text(
-                    'Shipped',
-                    style: TextStyle(
+                    "${widget.order.orderStatus}",
+                    style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                         fontFamily: 'SF Pro',
@@ -102,9 +109,9 @@ class _OrderState extends State<Order> {
                   ),
                 ],
               ),
-              const Text(
-                'Total: \$100',
-                style: TextStyle(
+              Text(
+                'Total: \$${widget.order.orderTotalPrice}',
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
                     fontFamily: 'SF Pro',

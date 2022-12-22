@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_check/cart/domain/bloc/order_bloc.dart';
 import 'package:restaurant_check/menu/domain/bloc/menu_bloc.dart';
 import 'package:restaurant_check/user/domain/bloc/user_bloc.dart';
 import 'package:restaurant_check/user/screens/sign_in_view.dart';
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         ),
         Provider<UserBloc>(
           create: (_) => UserBloc(),
+        ),
+        Provider<OrderBloc>(
+          create: (_) => OrderBloc(),
         ),
       ],
       child: MaterialApp(

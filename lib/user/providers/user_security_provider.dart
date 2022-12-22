@@ -54,6 +54,7 @@ class UserSecurityProvider {
     return statusCode;
   }
 
+
   Future<int> logOut() async {
     try {
       final response = await http.put(

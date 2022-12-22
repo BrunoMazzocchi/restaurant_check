@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_check/bloc/restaurant_bloc.dart';
+import 'package:restaurant_check/cart/domain/bloc/order_bloc.dart';
+import 'package:restaurant_check/cart/widgets/completed_order_list.dart';
 import 'package:restaurant_check/user/screens/sign_in_view.dart';
 
-import '../../menu/widgets/order.dart';
+import '../../cart/domain/models/order_model.dart';
+import '../../cart/widgets/profile_orders.dart';
 import '../domain/bloc/user_bloc.dart';
 import '../domain/models/user_model.dart';
 
@@ -18,8 +18,9 @@ class Profile extends StatefulWidget {
 
 class _Profile extends State<Profile> {
 
-  late Future<User?> data = Provider.of<UserBloc>(context, listen: false)
+  late Future<User?> userData = Provider.of<UserBloc>(context, listen: false)
       .fetchUser();
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class _Profile extends State<Profile> {
     double height = MediaQuery.of(context).size.height;
 
     return FutureBuilder<User?>(
-        future: data,
+        future: userData,
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -119,30 +120,7 @@ class _Profile extends State<Profile> {
                       )
                     ],
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                    child: SizedBox(
-                        child: Column(
-                      children: [
-                        const Text(
-                          "Recent orders",
-                          style: TextStyle(
-                            fontFamily: "SF Pro",
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Column(
-                          children: const [
-                            Order(),
-                            Order(),
-                          ],
-                        )
-                      ],
-                    )),
-                  )
+                  const ProfileOrders(),
                 ],
               );
               break;

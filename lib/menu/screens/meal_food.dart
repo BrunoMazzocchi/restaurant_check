@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant_check/cart/screens/main_cart.dart';
 import 'package:restaurant_check/menu/widgets/food_list.dart';
 
+import '../../main/screens/settings.dart';
 import '../../main/widgets/custom_top_bar.dart';
 import '../domain/models/meal_model.dart';
 import '../widgets/meal_food_list.dart';
@@ -48,7 +50,7 @@ class MealFood extends StatelessWidget {
           ),
           SizedBox(
             width: width,
-            height: height - 310,
+            height: height - 256,
             child: ListView(
               padding: const EdgeInsets.only(top: 0, bottom: 20),
               children: [
@@ -96,14 +98,18 @@ class MealFood extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 3,),
-            child: CupertinoButton.filled(
-              onPressed: () {},
-              child: const Text('Check your cart'),
-            ),
-          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const MainCart()));
+        },
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.shopping_cart),
       ),
     );
   }

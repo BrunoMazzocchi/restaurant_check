@@ -37,6 +37,7 @@ class Food {
   int? categoryId;
   int? mealId;
 
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['food_id'] = foodId;

@@ -1,24 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../domain/models/food_model.dart';
-import '../screens/open_food.dart';
+import '../../menu/domain/models/food_model.dart';
+import '../domain/models/cart.dart';
 
-class FoodInSpecificList extends StatefulWidget {
+
+
+class InOrderFood extends StatefulWidget {
   final Food food;
-
-  const FoodInSpecificList({
+  final int quantity;
+  const InOrderFood({
     Key? key,
-    required this.food,
+    required this.food, required this.quantity,
   }) : super(key: key);
 
   @override
-  State<FoodInSpecificList> createState() => _FoodInSpecificListState();
+  State<InOrderFood> createState() => _InOrderFoodState();
 }
 
-class _FoodInSpecificListState extends State<FoodInSpecificList> {
-  int counter = 0;
+class _InOrderFoodState extends State<InOrderFood> {
+  late int counter;
 
+  @override
+  void initState() {
+    counter = widget.quantity;
+    super.initState();
+  }
   void operation(int value) {
     if (value == -1 && counter > 0) {
       setState(() {
@@ -140,12 +147,6 @@ class _FoodInSpecificListState extends State<FoodInSpecificList> {
         ]),
       ),
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => OpenFood(
-                      food: widget.food,
-                    )));
       },
     );
   }
