@@ -7,6 +7,7 @@ import 'package:restaurant_check/user/domain/models/device_model.dart';
 
 import '../domain/models/jwt_model.dart';
 import '../domain/models/user_model.dart';
+
 class UserSecurityProvider {
   FlutterSecureStorage storage = const FlutterSecureStorage();
   int statusCode = 401;
@@ -17,9 +18,13 @@ class UserSecurityProvider {
         .accessToken!;
   }
 
+  Future<int> expireDate() async {
+    return Jwt.fromJson(jsonDecode("${await storage.read(key: 'jwt')}"))
+        .expiryDuration!;
+  }
+
   Future<int> fetchUserJwt(String email, password) async {
     try {
-
       AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
       Device deviceInfo =
           Device(deviceId: androidInfo.id, deviceType: androidInfo.brand);
@@ -53,7 +58,6 @@ class UserSecurityProvider {
     }
     return statusCode;
   }
-
 
   Future<int> logOut() async {
     try {
@@ -105,4 +109,33 @@ class UserSecurityProvider {
 
     return null;
   }
+
+  Future<bool> isUserLoggedIn() async {
+    bool isLogged = false;
+    if (Jwt.fromJson(jsonDecode("${await storage.read(key: 'jwt')}"))
+                .accessToken !=
+            null &&
+        Jwt.fromJson(jsonDecode("${await storage.read(key: 'jwt')}"))
+                .expiryDuration! >
+            DateTime.now().millisecondsSinceEpoch) {
+      final response = await http.post(
+        Uri.parse('http://192.168.1.5:8000/auth/validate'),
+        body: json.encode({
+          'token': await accessToken(),
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        isLogged = true;
+      } else {
+        isLogged = false;
+      }
+    } else {
+      isLogged = false;
+    }
+
+    return isLogged;
+  }
+
+
 }

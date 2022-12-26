@@ -42,4 +42,8 @@ class UserSecurityRepository {
   Future<int> logOutUser() async {
     return await _userSecurityProvider.logOut();
   }
+
+  Future<bool> isUserLoggedIn() {
+    return _userSecurityProvider.isUserLoggedIn();
+  }
 }

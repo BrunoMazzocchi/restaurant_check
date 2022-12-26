@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
@@ -7,6 +9,8 @@ import 'package:restaurant_check/menu/domain/bloc/menu_bloc.dart';
 import 'package:restaurant_check/user/domain/bloc/user_bloc.dart';
 import 'package:restaurant_check/user/screens/sign_in_view.dart';
 import 'package:bloc/bloc.dart';
+
+import 'menu/domain/models/food_model.dart';
 
 void main() {
 

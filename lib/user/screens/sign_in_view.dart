@@ -19,8 +19,7 @@ class _SignInViewState extends State<SignInView> {
   late double width;
   late double height;
 
-  late Future<int> isValid =
-      Provider.of<UserBloc>(context, listen: false).isValid();
+  late Future<bool> isUserLoggedIn = Provider.of<UserBloc>(context, listen: false).isUserLoggedIn();
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +35,12 @@ class _SignInViewState extends State<SignInView> {
         statusCode = value;
         switch (statusCode) {
           case 200:
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) =>  const Navigation(index: 0,)));
+            isUserLoggedIn = userBloc.isUserLoggedIn();
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  const Navigation(index: 0,)),
+            );
             break;
           case 401:
             showDialog(
@@ -125,7 +128,7 @@ class _SignInViewState extends State<SignInView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CupertinoTextField(
-                          textInputAction: TextInputAction.go,
+                          textInputAction: TextInputAction.next,
                           controller: emailController,
                           placeholder: "Email",
                           placeholderStyle: const TextStyle(
@@ -152,7 +155,6 @@ class _SignInViewState extends State<SignInView> {
                           height: 25,
                         ),
                         CupertinoTextField(
-                          textInputAction: TextInputAction.go,
                           controller: passwordController,
                           placeholder: "Password",
                           placeholderStyle: const TextStyle(
@@ -207,22 +209,25 @@ class _SignInViewState extends State<SignInView> {
     }
 
     Widget handleCurrentSession() {
-      return FutureBuilder(
-        future: isValid,
-        builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-          if (snapshot.hasData) {
-            statusCode = snapshot.data!;
-            switch (statusCode) {
-              case 200:
-                return const Navigation(index: 0,);
-              case 401:
+      return FutureBuilder<bool>(
+        future: isUserLoggedIn,
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          switch(snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.active:
+            case ConnectionState.waiting:
+              return const Center(child: CircularProgressIndicator());
+            case ConnectionState.done:
+              if (snapshot.hasError) {
+                print(snapshot.error);
                 return signIn();
-            }
-            return const SignInView();
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+              } else {
+                if (snapshot.data == true) {
+                  return const Navigation(index: 0,);
+                } else {
+                  return signIn();
+                }
+              }
           }
         },
       );

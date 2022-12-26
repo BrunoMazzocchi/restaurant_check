@@ -22,6 +22,9 @@ class UserBloc extends Bloc {
     return _userSecurityRepository.isValid();
   }
 
+  Future<bool> isUserLoggedIn(){
+    return _userSecurityRepository.isUserLoggedIn();
+  }
   @override
   void dispose() {
   }

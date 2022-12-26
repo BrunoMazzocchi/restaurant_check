@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_check/cart/domain/bloc/order_bloc.dart';
+import 'package:restaurant_check/cart/domain/models/cart.dart';
 import 'package:restaurant_check/cart/widgets/in_order_food.dart';
 import 'package:restaurant_check/main/widgets/navigation.dart';
 
-import '../../menu/domain/models/food_model.dart';
 
 class MainCart extends StatefulWidget {
   const MainCart({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class MainCart extends StatefulWidget {
 class _MainCartState extends State<MainCart> {
   late var orderBloc = Provider.of<OrderBloc>(context, listen: false);
 
-  late HashMap<Food, int> cart = orderBloc.getCart();
+  late List<Cart> cart = orderBloc.getCart();
 
   late Widget body;
 
@@ -35,20 +35,6 @@ class _MainCartState extends State<MainCart> {
     });
   }
 
-  Food food = Food(
-    foodId: 1,
-    foodName: 'Burger',
-    price: 10,
-    description: 'Burger with cheese',
-    foodImage:
-    'https://burgerkingec.com/wp-content/uploads/2021/09/Festi%CC%81n-de-Reyes-04.png',
-    categoryId: 1,
-    mealId: 1,
-    discount: 0.1,
-    rating: 4.5,
-    calories: 100,
-    preparationTime: 10,
-  );
 
   Widget emptyCart() {
     return Container(
@@ -74,6 +60,7 @@ class _MainCartState extends State<MainCart> {
           CupertinoButton.filled(
             child: const Text('Go back to menu'),
             onPressed: () {
+              Navigator.pop(context);
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -105,8 +92,8 @@ class _MainCartState extends State<MainCart> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InOrderFood(
-                        food: cart.keys.elementAt(index),
-                        quantity: cart.values.elementAt(index),
+                        food: cart[index].food,
+                        quantity: cart[index].quantity,
                       ),
                       const SizedBox(
                         width: 20,
@@ -118,6 +105,7 @@ class _MainCartState extends State<MainCart> {
           CupertinoButton.filled(
               child: const Text('Go to checkout'),
               onPressed: () {
+                Navigator.pop(context);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -133,6 +121,7 @@ class _MainCartState extends State<MainCart> {
 
   @override
   Widget build(BuildContext context) {
+
     setFood();
     String user = 'Tester';
     double width = MediaQuery.of(context).size.width;
