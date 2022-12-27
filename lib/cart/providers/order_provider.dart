@@ -65,4 +65,44 @@ class OrderProvider {
 
     return orders;
   }
+
+  Future<int> postOrder(Order order) async {
+    try {
+      final response = await http.post(
+        Uri.parse('http://192.168.1.5:8000/api/orders/add'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${await accessToken()}',
+        },
+        body: jsonEncode({
+          "address": order.address,
+          "date": order.date,
+          "payment_method": order.paymentMethod,
+          "payment_status": order.paymentStatus,
+          "delivery_method": order.deliveryMethod,
+          "delivery_status": order.deliveryStatus,
+          "order_status": order.orderStatus,
+          "order_type": order.orderType,
+          "order_note": order.orderNote,
+          "order_price": order.orderPrice,
+          "order_discount": order.orderDiscount,
+          "order_total_price": order.orderTotalPrice,
+          "user_id": order.userId,
+          "foods": order.foods,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        cart.removeRange(0, cart.length);
+        return 200;
+
+      } else {
+        return 400;
+      }
+    } catch (error, stacktrace) {
+      print("Exception occurred: $error Stacktrace: $stacktrace");
+
+      throw Exception('Failed to load user data');
+    }
+  }
 }

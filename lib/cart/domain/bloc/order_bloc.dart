@@ -1,6 +1,7 @@
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:restaurant_check/cart/domain/repository/order_repository.dart';
 
+import '../../../menu/domain/models/food_model.dart';
 import '../models/cart.dart';
 import '../models/order_model.dart';
 
@@ -19,6 +20,16 @@ class OrderBloc extends Bloc {
 
   Future<List<Order>> getOrderByOrderStatus(String orderStatus) =>
       _orderRepository.getOrderByOrderStatus(orderStatus);
+
+  Future<int> postOrder(List<Cart> foods, String address,  note,  firstName,  lastName,  phone) =>
+      _orderRepository.postOrder(
+        foods,
+        address,
+        note,
+        firstName,
+        lastName,
+        phone
+      );
 
   @override
   void dispose() {

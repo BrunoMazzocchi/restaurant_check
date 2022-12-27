@@ -8,6 +8,8 @@ import 'package:restaurant_check/cart/domain/models/cart.dart';
 import 'package:restaurant_check/cart/widgets/in_order_food.dart';
 import 'package:restaurant_check/main/widgets/navigation.dart';
 
+import 'checkout.dart';
+
 
 class MainCart extends StatefulWidget {
   const MainCart({Key? key}) : super(key: key);
@@ -109,9 +111,7 @@ class _MainCartState extends State<MainCart> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Navigation(
-                              index: 2,
-                            )));
+                        builder: (context) => const Checkout()));
               })
         ],
       ),

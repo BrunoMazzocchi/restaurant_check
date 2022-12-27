@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../cart/domain/bloc/order_bloc.dart';
 
+import '../../cart/domain/models/cart.dart';
 import '../domain/models/food_model.dart';
 import '../screens/open_food.dart';
 
@@ -17,8 +20,11 @@ class FoodInSpecificList extends StatefulWidget {
 }
 
 class _FoodInSpecificListState extends State<FoodInSpecificList> {
-  int counter = 0;
+  late OrderBloc orderBloc = Provider.of(context, listen: false);
 
+  int counter = 0;
+  bool wantsToAdd = false;
+  late Widget currentWidget;
   void operation(int value) {
     if (value == -1 && counter > 0) {
       setState(() {
@@ -34,9 +40,82 @@ class _FoodInSpecificListState extends State<FoodInSpecificList> {
       });
     }
   }
+
+
+
+  Widget addToBag () {
+    return Row(
+      children: [
+        CupertinoButton(
+          onPressed: () {
+            operation(-1);
+          },
+          child: const Icon(
+            CupertinoIcons.minus,
+            color: Colors.black,
+          ),
+        ),
+        Text('$counter',
+          style: const TextStyle(
+            fontFamily: 'SF Pro',
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),),
+        CupertinoButton(
+          onPressed: () {
+            operation(1);
+          },
+          child: const Icon(
+            CupertinoIcons.add,
+            color: Colors.black,
+          ),
+        ),
+
+        const SizedBox(
+          width: 10,
+        ),
+
+        CupertinoButton(
+          onPressed: () {
+            if(counter != 0){
+              Cart cart = Cart(food: widget.food, quantity: counter);
+              orderBloc.addToCart(cart);
+            }
+            counter = 0;
+          },
+          child: const Icon(
+            CupertinoIcons.cart_badge_plus,
+            color: Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
+
+  addToBagState() {
+    setState(() {
+      wantsToAdd = !wantsToAdd;
+    });
+  }
+
+  Widget currentAddAction () {
+    return IconButton(onPressed: (){
+      addToBagState();
+        }, icon: const Icon(CupertinoIcons.bag_badge_plus));
+  }
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
+    currentWidget = wantsToAdd ? addToBag() : currentAddAction();
+
+
     return InkWell(
       child: Container(
 
@@ -106,34 +185,7 @@ class _FoodInSpecificListState extends State<FoodInSpecificList> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Row(
-                  children: [
-                    CupertinoButton(
-                      onPressed: () {
-                        operation(-1);
-                      },
-                      child: const Icon(
-                        CupertinoIcons.minus,
-                        color: Colors.black,
-                      ),
-                    ),
-                     Text('$counter',
-                      style: const TextStyle(
-                        fontFamily: 'SF Pro',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),),
-                    CupertinoButton(
-                      onPressed: () {
-                        operation(1);
-                      },
-                      child: const Icon(
-                        CupertinoIcons.add,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                )
+                currentWidget,
               ],
             ),
           )
