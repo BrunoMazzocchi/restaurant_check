@@ -28,12 +28,13 @@ class FoodMealCard extends StatelessWidget {
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           Image(
             image: Image.network(meal.mealImage.toString()).image,
-            width: 100,
-            height: 100,
+            width: 80,
+            height: 80,
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 width: 200,
@@ -55,9 +56,9 @@ class FoodMealCard extends StatelessWidget {
                   style: const TextStyle(
                     fontFamily: 'SF Pro',
                     fontWeight: FontWeight.normal,
-                    fontSize: 15,
+                    fontSize: 12,
                   ),
-                  maxLines: 2,
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
               )

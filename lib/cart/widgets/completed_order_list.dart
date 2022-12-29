@@ -8,7 +8,8 @@ import '../domain/bloc/order_bloc.dart';
 import '../domain/models/order_model.dart';
 
 class CompletedOrder extends StatefulWidget {
-  const CompletedOrder({Key? key}) : super(key: key);
+  final String status;
+  const CompletedOrder({Key? key, required this.status}) : super(key: key);
 
   @override
   State<CompletedOrder> createState() => _CompletedOrderState();
@@ -17,7 +18,7 @@ class CompletedOrder extends StatefulWidget {
 class _CompletedOrderState extends State<CompletedOrder> {
   late Future<List<Order>> userOrders =
       Provider.of<OrderBloc>(context, listen: false)
-          .getOrderByOrderStatus('Active');
+          .getOrderByOrderStatus(widget.status);
 
   @override
   Widget build(BuildContext context) {

@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_check/cart/domain/bloc/order_bloc.dart';
 import 'package:restaurant_check/cart/domain/models/cart.dart';
-import 'package:restaurant_check/cart/screens/main_cart.dart';
-
-import '../../main/screens/settings.dart';
-import '../domain/bloc/menu_bloc.dart';
 import '../domain/models/food_model.dart';
 
 class OpenFood extends StatefulWidget {
@@ -57,7 +53,7 @@ class _OpenFoodState extends State<OpenFood> {
               children: [
                 Container(
                   padding: const EdgeInsets.only(top: 50, bottom: 10),
-                  width: 500,
+                  width: width,
                   height: 340,
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(222, 219, 216, 1),
@@ -73,6 +69,7 @@ class _OpenFoodState extends State<OpenFood> {
                   child: Image(
                     image:
                         Image.network(widget.food.foodImage.toString()).image,
+
                   ),
                 ),
               ],
@@ -243,8 +240,16 @@ class _OpenFoodState extends State<OpenFood> {
                     if(counter != 0){
                       Cart cart = Cart(food: widget.food, quantity: counter);
                       orderBloc.addToCart(cart);
+                      counter = 0;
+
+                      SnackBar snackBar = const SnackBar(
+                        content: Text('Added to cart'),
+                        duration: Duration(seconds: 2),
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
-                    counter = 0;
+
                   },
                   child: const Text('Add to cart'),
                 ),

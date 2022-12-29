@@ -64,8 +64,7 @@ class OrderRepository {
     throw UnimplementedError();
   }
 
-  Future<Order> deleteOrder(Order order) {
-    // TODO: implement deleteOrder
-    throw UnimplementedError();
+   removeFood(Food food) {
+    _orderProvider.removeFood(food);
   }
 }

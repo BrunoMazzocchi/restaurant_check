@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../menu/domain/models/food_model.dart';
+import '../domain/bloc/order_bloc.dart';
 import '../domain/models/cart.dart';
 
 
@@ -20,27 +22,28 @@ class InOrderFood extends StatefulWidget {
 
 class _InOrderFoodState extends State<InOrderFood> {
   late int counter;
+  late double totalPrice;
+  late OrderBloc orderBloc;
+
 
   @override
   void initState() {
     counter = widget.quantity;
+    totalPrice = widget.food.price! * counter;
+
+    orderBloc = Provider.of<OrderBloc>(context, listen: false);
+
     super.initState();
   }
-  void operation(int value) {
-    if (value == -1 && counter > 0) {
-      setState(() {
-        counter--;
-      });
-    } else if (value == 1) {
-      setState(() {
-        counter++;
-      });
-    } else {
-      setState(() {
-        counter = 0;
-      });
-    }
+
+
+  removeFood() {
+    setState(() {
+      orderBloc.removeFood(widget.food);
+    });
   }
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -70,7 +73,7 @@ class _InOrderFoodState extends State<InOrderFood> {
                     size: 20,
                   ),
                   Text(
-                    widget.food.price.toString(),
+                    totalPrice.toString(),
                     style: const TextStyle(
                       fontFamily: 'SF Pro',
                       fontWeight: FontWeight.bold,
@@ -85,6 +88,7 @@ class _InOrderFoodState extends State<InOrderFood> {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child:Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 SizedBox(
                   width: 200,
@@ -114,31 +118,14 @@ class _InOrderFoodState extends State<InOrderFood> {
                   ),
                 ),
                 Row(
+
                   children: [
-                    CupertinoButton(
-                      onPressed: () {
-                        operation(-1);
-                      },
-                      child: const Icon(
-                        CupertinoIcons.minus,
-                        color: Colors.black,
-                      ),
-                    ),
-                     Text('$counter',
-                      style: const TextStyle(
-                        fontFamily: 'SF Pro',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),),
-                    CupertinoButton(
-                      onPressed: () {
-                        operation(1);
-                      },
-                      child: const Icon(
-                        CupertinoIcons.add,
-                        color: Colors.black,
-                      ),
-                    ),
+
+                    CupertinoButton(child: const Icon(CupertinoIcons.delete_solid,
+                    color: Colors.grey,), onPressed: () {
+                      removeFood();
+                    }),
+
                   ],
                 )
               ],

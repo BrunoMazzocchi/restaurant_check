@@ -19,6 +19,9 @@ class MealFoodList extends StatefulWidget {
 class _MealFoodListState extends State<MealFoodList> {
   late Future<List<Food>> data = Provider.of<MenuBloc>(context, listen: false)
       .fetchFoodByMealId(widget.mealId);
+
+
+
   @override
   Widget build(BuildContext context) {
     MenuBloc menuBloc = Provider.of(context);

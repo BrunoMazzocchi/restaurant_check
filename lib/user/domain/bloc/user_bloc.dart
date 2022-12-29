@@ -25,6 +25,11 @@ class UserBloc extends Bloc {
   Future<bool> isUserLoggedIn(){
     return _userSecurityRepository.isUserLoggedIn();
   }
+
+  Future<int> signUpUser(String email, password, name, nickname) {
+    return _userSecurityRepository.signUpUser(email, password, name, nickname);
+  }
+
   @override
   void dispose() {
   }

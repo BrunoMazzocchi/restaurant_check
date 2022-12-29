@@ -4,7 +4,7 @@ import 'package:restaurant_check/menu/domain/bloc/menu_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../domain/models/food_model.dart';
-import 'food_image_timer.dart';
+import 'today_recommendation.dart';
 
 class FoodList extends StatefulWidget {
   const FoodList({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class _FoodListState extends State<FoodList> {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      FoodImageTimer(food: snapshot.data![index]),
+                      TodayRecommendation(food: snapshot.data![index]),
                       const SizedBox(
                         width: 20,
                       ),

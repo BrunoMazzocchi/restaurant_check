@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:restaurant_check/main/screens/settings.dart';
 import 'package:restaurant_check/menu/domain/models/category_model.dart';
-import 'package:restaurant_check/menu/screens/open_food.dart';
 import 'package:restaurant_check/menu/widgets/category_food_list.dart';
 import 'package:restaurant_check/menu/widgets/food_list.dart';
 

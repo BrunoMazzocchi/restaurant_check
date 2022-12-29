@@ -80,6 +80,13 @@ class _FoodInSpecificListState extends State<FoodInSpecificList> {
             if(counter != 0){
               Cart cart = Cart(food: widget.food, quantity: counter);
               orderBloc.addToCart(cart);
+
+              SnackBar snackBar = const SnackBar(
+                content: Text('Added to cart'),
+                duration: Duration(seconds: 2),
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
             counter = 0;
           },
@@ -125,7 +132,8 @@ class _FoodInSpecificListState extends State<FoodInSpecificList> {
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             color: Color.fromRGBO(222, 219, 216, 1)),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -157,6 +165,7 @@ class _FoodInSpecificListState extends State<FoodInSpecificList> {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child:Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 SizedBox(
                   width: 200,

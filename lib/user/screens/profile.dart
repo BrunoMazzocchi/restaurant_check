@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_check/cart/domain/bloc/order_bloc.dart';
-import 'package:restaurant_check/cart/widgets/completed_order_list.dart';
+import 'package:restaurant_check/user/screens/settings.dart';
 import 'package:restaurant_check/user/screens/sign_in_view.dart';
-
-import '../../cart/domain/models/order_model.dart';
 import '../../cart/widgets/profile_orders.dart';
 import '../domain/bloc/user_bloc.dart';
 import '../domain/models/user_model.dart';
@@ -35,6 +32,9 @@ class _Profile extends State<Profile> {
             case ConnectionState.none:
             case ConnectionState.waiting:
             case ConnectionState.active:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
               break;
             case ConnectionState.done:
               return Column(
@@ -59,7 +59,14 @@ class _Profile extends State<Profile> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const Settings(),
+                                    ),
+                                  );
+                                },
                                 icon: const Icon(
                                   Icons.more_horiz_outlined,
                                   size: 30,
@@ -90,6 +97,13 @@ class _Profile extends State<Profile> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => const SignInView()));
+
+                                  SnackBar snackBar = const SnackBar(
+                                    content: Text('Logged out'),
+                                    duration: Duration(seconds: 2),
+                                  );
+
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 },
                                 icon: const Icon(
                                   Icons.logout,

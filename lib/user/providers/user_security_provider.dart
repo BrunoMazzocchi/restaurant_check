@@ -137,5 +137,37 @@ class UserSecurityProvider {
     return isLogged;
   }
 
+  Future<int> signUpUser(String email, password, name, nickname) async {
+    int statusCode;
+
+    try {
+      final response = await http.post(
+        Uri.parse('http://192.168.1.5:8000/auth/signup'),
+        body: json.encode({
+          'email': email,
+          'password': password,
+          'role': 'ROLE_USER',
+          'name': name,
+          'nickname': nickname,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if(response.statusCode == 201) {
+        return statusCode = response.statusCode;
+      } else {
+        statusCode = response.statusCode;
+      }
+
+  } catch (error, stacktrace) {
+      print("Exception occurred: $error Stacktrace: $stacktrace");
+
+      throw Exception('Failed to load data');
+    }
+    return statusCode;
+  }
+
 
 }

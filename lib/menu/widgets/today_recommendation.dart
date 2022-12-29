@@ -3,11 +3,10 @@ import 'package:restaurant_check/menu/screens/open_food.dart';
 
 import '../domain/models/food_model.dart';
 
-
-class FoodImageTimer extends StatelessWidget {
+class TodayRecommendation extends StatelessWidget {
   final Food food;
 
-  const FoodImageTimer({
+  const TodayRecommendation({
     Key? key,
     required this.food,
   }) : super(key: key);
@@ -26,24 +25,11 @@ class FoodImageTimer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Image(
-                width: 90,
-                height: 90,
-                image: Image.network(food.foodImage.toString()).image,
-                fit: BoxFit.cover),
-            Row(
-              children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.av_timer_rounded,
-                      color: Colors.grey,
-                      size: 25,
-                    ),
-                    Text(food.preparationTime.toString()),
-                  ],
-                ),
-              ],
-            )
+              width: 90,
+              height: 90,
+              image: Image.network(food.foodImage.toString()).image,
+              fit: BoxFit.cover,
+            ),
           ],
         ),
       ),

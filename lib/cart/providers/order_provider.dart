@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:restaurant_check/cart/domain/models/cart.dart';
 import 'package:restaurant_check/cart/domain/models/order_model.dart';
 
+import '../../menu/domain/models/food_model.dart';
 import '../../user/domain/models/jwt_model.dart';
 
 class OrderProvider {
@@ -93,7 +94,7 @@ class OrderProvider {
       );
 
       if (response.statusCode == 200) {
-        cart.removeRange(0, cart.length);
+        cart.clear();
         return 200;
 
       } else {
@@ -105,4 +106,9 @@ class OrderProvider {
       throw Exception('Failed to load user data');
     }
   }
+
+  removeFood(Food food) {
+    cart.removeWhere((element) => element.food.foodId == food.foodId);
+  }
+
 }

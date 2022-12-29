@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../user/domain/bloc/user_bloc.dart';
+import '../../user/domain/models/user_model.dart';
 
 class CustomTopBar extends StatelessWidget {
   final String phrase;
@@ -13,7 +17,7 @@ class CustomTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String name = 'User';
+
     return Container(
       margin: const EdgeInsets.only(
         top: 40,
@@ -35,16 +39,6 @@ class CustomTopBar extends StatelessWidget {
                       ))
                 ],
               ),
-              Column(
-                children: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        CupertinoIcons.search,
-                        size: 35,
-                      ))
-                ],
-              )
             ],
           ),
           Container(
@@ -59,7 +53,7 @@ class CustomTopBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '$phrase $name, ',
+                    '$phrase, ',
                     style: const TextStyle(
                         fontFamily: 'SF Pro',
                         fontWeight: FontWeight.normal,

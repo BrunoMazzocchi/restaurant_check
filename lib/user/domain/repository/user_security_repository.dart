@@ -46,4 +46,19 @@ class UserSecurityRepository {
   Future<bool> isUserLoggedIn() {
     return _userSecurityProvider.isUserLoggedIn();
   }
+
+  Future<int> signUpUser(String email, password, name, nickname) async {
+    try {
+      statusCode = await _userSecurityProvider.signUpUser(email, password, name, nickname);
+      if (statusCode == 201) {
+        return 201;
+      } else {
+        return 401;
+      }
+    } catch (error, stacktrace) {
+      print("Exception occurred: $error Stacktrace: $stacktrace");
+
+      throw Exception('Failed to load token');
+    }
+  }
 }

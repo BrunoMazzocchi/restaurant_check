@@ -31,6 +31,10 @@ class OrderBloc extends Bloc {
         phone
       );
 
+  removeFood(Food food) {
+    _orderRepository.removeFood(food);
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
