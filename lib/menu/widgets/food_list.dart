@@ -14,9 +14,31 @@ class FoodList extends StatefulWidget {
 }
 
 class _FoodListState extends State<FoodList> {
+  late Future<List<Food>> data =
+      Provider.of<MenuBloc>(context, listen: false).fetchFood();
 
-  late Future<List<Food>> data = Provider.of<MenuBloc>(context, listen: false)
-      .fetchFood();
+
+  Widget shimmerList() {
+    return Shimmer(
+      gradient: LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          Colors.grey[300]!,
+          Colors.grey[100]!,
+          Colors.grey[300]!,
+        ],
+      ),
+      child: Container(
+        height: 140,
+        width: 180,
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,39 +48,28 @@ class _FoodListState extends State<FoodList> {
       child: FutureBuilder<List<Food>>(
         future: data,
         builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-            case ConnectionState.waiting:
-            case ConnectionState.active:
-              return SizedBox(
-                width: 200.0,
-                height: 100.0,
-                child: Shimmer.fromColors(
-                  baseColor: Colors.grey[300]!,
-                  highlightColor: Colors.grey[100]!,
-                  child: const Card(
-                    color: Colors.white,
-                    child: Text('Loading'),
-                  ),
-                ),
-              );
-            case ConnectionState.done:
-              return ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TodayRecommendation(food: snapshot.data![index]),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                    ],
-                  );
-                },
-              );
+          if (snapshot.hasData) {
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return Row(
+                  children: [
+                    TodayRecommendation(
+                      food: snapshot.data![index],
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                  ],
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return shimmerList();
           }
+
+          return shimmerList();
         },
       ),
     );

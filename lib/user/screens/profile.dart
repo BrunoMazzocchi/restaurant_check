@@ -19,6 +19,14 @@ class _Profile extends State<Profile> {
   late Future<User?> userData =
       Provider.of<UserBloc>(context, listen: false).fetchUser();
 
+
+  @override
+  void initState() {
+    userData = Provider.of<UserBloc>(context, listen: false).fetchUser();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     UserBloc userBloc = Provider.of<UserBloc>(context);
@@ -82,7 +90,6 @@ class _Profile extends State<Profile> {
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(100),
-
                             ),
                           ),
                           IconButton(
@@ -92,7 +99,7 @@ class _Profile extends State<Profile> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                      const SignInView()));
+                                          const SignInView()));
 
                               SnackBar snackBar = const SnackBar(
                                 content: Text('Logged out'),
@@ -112,7 +119,7 @@ class _Profile extends State<Profile> {
                       ),
                       const Text(
                         'Loading',
-                        style:  TextStyle(
+                        style: TextStyle(
                           fontFamily: "SF Pro",
                           color: Colors.white,
                           fontSize: 20,
@@ -121,7 +128,7 @@ class _Profile extends State<Profile> {
                       ),
                       const Text(
                         'Loading',
-                        style:  TextStyle(
+                        style: TextStyle(
                             fontFamily: "SF Pro",
                             color: Colors.white,
                             fontSize: 20,
@@ -133,15 +140,14 @@ class _Profile extends State<Profile> {
               ),
               const ProfileOrders(),
             ],
-          )
-      );
+          ));
     }
 
     return FutureBuilder<User?>(
         future: userData,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            Column(
+          if(snapshot.hasData) {
+            return Column(
               children: [
                 Stack(
                   alignment: Alignment.center,
@@ -189,7 +195,7 @@ class _Profile extends State<Profile> {
                                 borderRadius: BorderRadius.circular(100),
                                 image: DecorationImage(
                                   image:
-                                      NetworkImage('${snapshot.data?.image}'),
+                                  NetworkImage('${snapshot.data?.image}'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -201,7 +207,7 @@ class _Profile extends State<Profile> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const SignInView()));
+                                        const SignInView()));
 
                                 SnackBar snackBar = const SnackBar(
                                   content: Text('Logged out'),
@@ -243,17 +249,9 @@ class _Profile extends State<Profile> {
                 const ProfileOrders(),
               ],
             );
-          } else if (snapshot.hasError) {
-            return  shimmerUser();
-
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return shimmerUser();
           }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
         });
   }
 }

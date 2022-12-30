@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 import '../domain/bloc/menu_bloc.dart';
 import '../domain/models/category_model.dart';
 import 'food_category_card.dart';
@@ -17,6 +18,49 @@ class _FoodCategoryState extends State<FoodCategoriesList> {
 
   late Future<List<Category>> data = Provider.of<MenuBloc>(context, listen: false)
       .fetchCategory();
+
+  Widget shimmerList() {
+    return Shimmer(
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Colors.grey[300]!,
+            Colors.grey[100]!,
+            Colors.grey[300]!,
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: 40,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            Container(
+              height: 40,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            Container(
+              height: 40,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ],
+        )
+    );
+  }
 
   @override
   Widget build(BuildContext context)  {
@@ -60,7 +104,7 @@ class _FoodCategoryState extends State<FoodCategoriesList> {
                     },
                   );
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return shimmerList();
                 }
               },
             ),
