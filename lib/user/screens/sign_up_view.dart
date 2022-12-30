@@ -46,14 +46,16 @@ class _SignUpViewState extends State<SignUpView> {
         case 401:
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Error signing up.Try with another email or nickname'),
+              content:
+                  Text('Error signing up.Try with another email or nickname'),
             ),
           );
           break;
         default:
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Error signing up. Try with another email or nickname'),
+              content:
+                  Text('Error signing up. Try with another email or nickname'),
             ),
           );
       }
@@ -71,6 +73,7 @@ class _SignUpViewState extends State<SignUpView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CupertinoTextField(
+          keyboardType: TextInputType.emailAddress,
           controller: emailController,
           placeholder: "Email",
           placeholderStyle: const TextStyle(
@@ -97,6 +100,8 @@ class _SignUpViewState extends State<SignUpView> {
           height: 25,
         ),
         CupertinoTextField(
+          obscureText: true,
+          keyboardType: TextInputType.visiblePassword,
           controller: passwordController,
           placeholder: "Password",
           placeholderStyle: const TextStyle(
@@ -123,6 +128,8 @@ class _SignUpViewState extends State<SignUpView> {
           height: 25,
         ),
         CupertinoTextField(
+          obscureText: true,
+          keyboardType: TextInputType.visiblePassword,
           controller: confirmPasswordController,
           placeholder: "Confirm password",
           placeholderStyle: const TextStyle(
@@ -156,14 +163,36 @@ class _SignUpViewState extends State<SignUpView> {
             ),
           ),
           onPressed: () {
-            if (passwordController.text == confirmPasswordController.text) {
-              verifySignUpProcess();
+            if (emailController.text.isEmpty ||
+                passwordController.text.isEmpty ||
+                confirmPasswordController.text.isEmpty) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Error'),
+                      content: const Text('Please fill in all the fields'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Close'),
+                        ),
+                      ],
+                    );
+                  });
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Passwords do not match'),
-                ),
-              );
+              if (passwordController.text == confirmPasswordController.text) {
+                FocusManager.instance.primaryFocus?.unfocus();
+                verifySignUpProcess();
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Passwords do not match'),
+                  ),
+                );
+              }
             }
           },
         ),
@@ -201,7 +230,6 @@ class _SignUpViewState extends State<SignUpView> {
         const SizedBox(
           height: 25,
         ),
-
         CupertinoTextField(
           controller: nickNameController,
           placeholder: "Nickname",
@@ -236,24 +264,43 @@ class _SignUpViewState extends State<SignUpView> {
             ),
           ),
           onPressed: () {
-            changeUI();
+            FocusManager.instance.primaryFocus?.unfocus();
+            if (nameController.text.isNotEmpty &&
+                nickNameController.text.isNotEmpty) {
+              changeUI();
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Error'),
+                      content: const Text('Please fill in all the fields'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Close'),
+                        ),
+                      ],
+                    );
+                  });
+            }
           },
         ),
       ],
     );
   }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-
-
     return Scaffold(
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
-
           Container(
             width: width,
             height: height * 0.45,
@@ -265,7 +312,6 @@ class _SignUpViewState extends State<SignUpView> {
               ),
             ),
           ),
-
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -289,16 +335,15 @@ class _SignUpViewState extends State<SignUpView> {
                       height: 150,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage("assets/img/ui_drawkit/drawkit_1.png"),
+                          image:
+                              AssetImage("assets/img/ui_drawkit/drawkit_1.png"),
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
-
                     Form(
                       child: body,
                     ),
-
                   ],
                 ),
               ),
