@@ -47,6 +47,9 @@ class UserSecurityProvider {
         statusCode = response.statusCode;
 
         storage.write(key: "jwt", value: jsonEncode(jwt.toJson()));
+
+        print("JWT: ${await storage.read(key: 'jwt')}");
+
       } else if (response.statusCode == 401) {
         statusCode = response.statusCode;
         throw Exception('Wrong credentials');
@@ -76,9 +79,10 @@ class UserSecurityProvider {
       );
 
       if (response.statusCode == 200) {
-        await storage.delete(key: 'jwt');
         statusCode = response.statusCode;
       }
+
+      await storage.delete(key: 'jwt');
     } catch (error, stacktrace) {
       print("Exception occurred: $error Stacktrace: $stacktrace");
 
@@ -155,19 +159,16 @@ class UserSecurityProvider {
         },
       );
 
-      if(response.statusCode == 201) {
+      if (response.statusCode == 201) {
         return statusCode = response.statusCode;
       } else {
         statusCode = response.statusCode;
       }
-
-  } catch (error, stacktrace) {
+    } catch (error, stacktrace) {
       print("Exception occurred: $error Stacktrace: $stacktrace");
 
       throw Exception('Failed to load data');
     }
     return statusCode;
   }
-
-
 }

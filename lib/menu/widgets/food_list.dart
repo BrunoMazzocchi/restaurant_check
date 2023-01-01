@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_check/menu/domain/bloc/menu_bloc.dart';
+import 'package:restaurant_check/user/domain/bloc/user_bloc.dart';
+import 'package:restaurant_check/user/screens/sign_in_view.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../domain/models/food_model.dart';
@@ -42,36 +44,39 @@ class _FoodListState extends State<FoodList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 20),
-      height: 140,
-      child: FutureBuilder<List<Food>>(
-        future: data,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return Row(
-                  children: [
-                    TodayRecommendation(
-                      food: snapshot.data![index],
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                  ],
-                );
-              },
-            );
-          } else if (snapshot.hasError) {
-            return shimmerList();
-          }
 
-          return shimmerList();
-        },
-      ),
-    );
-  }
+   return Container(
+        margin: const EdgeInsets.only(top: 20),
+        height: 140,
+        child: FutureBuilder<List<Food>>(
+          future: data,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      TodayRecommendation(
+                        food: snapshot.data![index],
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else if (snapshot.hasError) {
+              return shimmerList();
+            }
+
+            return shimmerList();
+          },
+        ),
+      );
+    }
+
+
 }
