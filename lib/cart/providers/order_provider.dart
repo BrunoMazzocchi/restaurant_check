@@ -93,10 +93,10 @@ class OrderProvider {
         }),
       );
 
-      if (response.statusCode == 200) {
-        cart.clear();
-        return 200;
+      cart.clear();
 
+      if (response.statusCode == 200) {
+        return 200;
       } else {
         return 400;
       }
@@ -110,5 +110,4 @@ class OrderProvider {
   removeFood(Food food) {
     cart.removeWhere((element) => element.food.foodId == food.foodId);
   }
-
 }
